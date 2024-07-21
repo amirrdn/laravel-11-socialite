@@ -30,17 +30,14 @@ class ArticleController extends Controller
                 $limit = 10;
                 break;
             case 'C':
-                $limit = 100; // Assume no limit for type C
+                $limit = 100;
                 break;
         }
         
-
-        // Retrieve articles from the database
         return \App\Models\Article::limit($limit)->get();
     }
     public function show($title)
     {
-        // return str_replace('-', ' ', strtolower($title));
         $article = Article::whereRaw('LOWER(slug) = ?', [strtolower($title)])->firstOrFail();
         $latestArticles = Article::whereRaw('LOWER(slug) != ?', [strtolower($title)])->get();
         $meta = [

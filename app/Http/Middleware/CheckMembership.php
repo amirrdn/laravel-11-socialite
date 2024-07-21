@@ -17,10 +17,24 @@ class CheckMembership
     public function handle(Request $request, Closure $next, $type)
     {
         $user = Auth::user();
-            if ($user && $user->membership_type) {
-                return $next($request);
-            }
+        switch ($type) {
+            case 'A':
+                if ($user->membership_type == 'A') {
+                    return $next($request);
+                }
+                break;
+            case 'B':
+                if ($user->membership_type == 'B') {
+                    return $next($request);
+                }
+                break;
+            case 'C':
+                if ($user->membership_type == 'C') {
+                    return $next($request);
+                }
+                break;
+        }
 
-        return redirect('home')->with('error', 'You do not have access to this page.');
+        return redirect('/home')->withErrors('Access Denied');
     }
 }

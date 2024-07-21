@@ -8,8 +8,6 @@ class MembershipController extends Controller
 {
     public function delete(Request $request)
     {
-        // Logika untuk menghapus data pengguna
-        // Misalnya, hapus akun pengguna yang sedang masuk
         $user = auth()->user();
         $user->delete();
 

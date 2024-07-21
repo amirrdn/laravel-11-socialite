@@ -27,11 +27,7 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::post('/delete-account', [MembershipController::class, 'delete'])->name('account.delete');
-});
-Route::middleware(['auth', 'check.membership:A'])->group(function () {
     Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
     Route::get('/articles/{title}.html', [ArticleController::class, 'show'])->name('articles.show');
     Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
 });
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
